@@ -1,0 +1,30 @@
+<p class="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @group.name %>
+</p>
+
+<p>
+  <b>User limit:</b>
+  <%= @group.user_limit %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @group.status %>
+</p>
+
+<p>
+  <b>Website:</b>
+  <%= @group.website %>
+</p>
+
+<p>
+  <b>Open:</b>
+  <%= @group.open %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>

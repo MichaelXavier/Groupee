@@ -1,0 +1,25 @@
+<p class="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @agenda_item.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @agenda_item.description %>
+</p>
+
+<p>
+  <b>Meeting:</b>
+  <%= @agenda_item.meeting_id %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%= @agenda_item.completed %>
+</p>
+
+
+<%= link_to 'Edit', edit_agenda_item_path(@agenda_item) %> |
+<%= link_to 'Back', agenda_items_path %>

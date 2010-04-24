@@ -1,0 +1,20 @@
+<p class="notice"><%= notice %></p>
+
+<p>
+  <b>Day of week:</b>
+  <%= @availability.day_of_week %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @availability.from %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%= @availability.to %>
+</p>
+
+
+<%= link_to 'Edit', edit_availability_path(@availability) %> |
+<%= link_to 'Back', availabilities_path %>

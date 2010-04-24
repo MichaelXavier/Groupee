@@ -1,0 +1,2 @@
+module AgendaItemsHelper
+end

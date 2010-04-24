@@ -1,0 +1,35 @@
+<p class="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @course.title %>
+</p>
+
+<p>
+  <b>Sln:</b>
+  <%= @course.sln %>
+</p>
+
+<p>
+  <b>Catalog name:</b>
+  <%= @course.catalog_name %>
+</p>
+
+<p>
+  <b>Section:</b>
+  <%= @course.section %>
+</p>
+
+<p>
+  <b>Quarter:</b>
+  <%= @course.quarter %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @course.year %>
+</p>
+
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>

@@ -1,0 +1,31 @@
+<h1>Listing groups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>User limit</th>
+    <th>Status</th>
+    <th>Website</th>
+    <th>Open</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @groups.each do |group| %>
+  <tr>
+    <td><%= group.name %></td>
+    <td><%= group.user_limit %></td>
+    <td><%= group.status %></td>
+    <td><%= group.website %></td>
+    <td><%= group.open %></td>
+    <td><%= link_to 'Show', group %></td>
+    <td><%= link_to 'Edit', edit_group_path(group) %></td>
+    <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Group', new_group_path %>

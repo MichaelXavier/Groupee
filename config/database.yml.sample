@@ -1,0 +1,32 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: Groupee_development
+  pool: 5
+  username: root
+  password: 
+  socket: /var/run/mysqld/mysqld.sock
+
+test: &TEST
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: Groupee_test
+  pool: 5
+  username: root
+  password: 
+  socket: /var/run/mysqld/mysqld.sock
+
+production:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: Groupee_production
+  pool: 5
+  username: root
+  password: 
+  socket: /var/run/mysqld/mysqld.sock
+
+cucumber:
+  <<: *TEST
