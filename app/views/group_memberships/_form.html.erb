@@ -1,4 +1,4 @@
-<%= form_for(@group_membership) do |f| %>
+<%= form_for(@group_membership, :builder => GroupMembershipFormBuilder) do |f| %>
   <% if @group_membership.errors.any? %>
   <div id="errorExplanation">
     <h2><%= pluralize(@group_membership.errors.count, "error") %> prohibited this group_membership from being saved:</h2>
@@ -11,12 +11,33 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :leader %><br />
+    <%= f.label :leader, "Select Group" %><br />
+    <%= course_select_tag nil, @courses, :onchange => "", :id => 'course_select' %>
+  </div>
+
+
+  <p>
+    Current Leaders:
+
+    <% if @group_membership.group and !@group_membership.group.leaders.empty? %>
+      <ul>
+        <% for leader in @group_membership.group.leaders %>
+          <li><%= leader.full_name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      There are no leaders for this group.
+    <% end %>
+  </p>
+
+
+  <div class="field">
+    <%= f.label :leader, "Join as Group Leader?" %><br />
     <%= f.check_box :leader %>
   </div>
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.text_field :status %>
+    <%= f.status_select :status %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -17,6 +17,8 @@ class Group < ActiveRecord::Base
 
   before_save :override_user_limit
 
+  accepts_nested_attributes_for :group_memberships, :allow_destroy => true
+
   def leaders
     group_memberships.leaders.collect(&:user)
   end

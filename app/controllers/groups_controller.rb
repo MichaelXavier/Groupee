@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = Group.all
+    @groups = @current_user.groups
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.xml
   def show
-    @group = Group.find(params[:id])
+    @group = @current_user.groups.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class GroupsController < ApplicationController
   # GET /groups/new
   # GET /groups/new.xml
   def new
-    @group = Group.new
+    @group = @current_user.groups.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
-    @group = Group.find(params[:id])
+    @group = @current_user.groups.find(params[:id])
   end
 
   # POST /groups
   # POST /groups.xml
   def create
-    @group = Group.new(params[:group])
+    @group = @current_user.groups.build(params[:group])
 
     respond_to do |format|
       if @group.save
@@ -56,7 +56,7 @@ class GroupsController < ApplicationController
   # PUT /groups/1
   # PUT /groups/1.xml
   def update
-    @group = Group.find(params[:id])
+    @group = @current_user.groups.find(params[:id])
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
@@ -72,12 +72,13 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.xml
   def destroy
-    @group = Group.find(params[:id])
-    @group.destroy
+    raise NotImplementedError, "Destroy functionality not yet implemented."
+    #@group = Group.find(params[:id])
+    #@group.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(groups_url) }
-      format.xml  { head :ok }
-    end
+    #respond_to do |format|
+    #  format.html { redirect_to(groups_url) }
+    #  format.xml  { head :ok }
+    #end
   end
 end

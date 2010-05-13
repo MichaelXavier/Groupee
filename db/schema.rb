@@ -9,7 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100502084029) do
+ActiveRecord::Schema.define(:version => 20100512075442) do
+
+  create_table "agenda_items", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "meeting_id"
+    t.boolean  "completed",   :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assignments", :force => true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.datetime "assigned"
+    t.datetime "due"
+    t.integer  "user_limit", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "availabilities", :force => true do |t|
     t.integer  "day_of_week"
@@ -23,6 +42,17 @@ ActiveRecord::Schema.define(:version => 20100502084029) do
   create_table "availabilities_groups", :id => false, :force => true do |t|
     t.integer "availability_id"
     t.integer "group_id"
+  end
+
+  create_table "courses", :force => true do |t|
+    t.string   "title"
+    t.string   "sln"
+    t.string   "catalog_name"
+    t.string   "section"
+    t.string   "quarter"
+    t.integer  "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "group_memberships", :force => true do |t|
@@ -42,11 +72,37 @@ ActiveRecord::Schema.define(:version => 20100502084029) do
     t.boolean  "open",       :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
+  end
+
+  create_table "link_types", :force => true do |t|
+    t.string   "name"
+    t.decimal  "weight",     :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "links", :force => true do |t|
+    t.integer  "link_type_id"
+    t.integer  "left_user_id"
+    t.integer  "right_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meetings", :force => true do |t|
+    t.string   "title"
+    t.datetime "from"
+    t.datetime "to"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "email"
     t.string   "studentid"
     t.string   "gender",     :default => "m"
     t.datetime "created_at"

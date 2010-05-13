@@ -1,0 +1,4 @@
+<%= select_tag(:course_id, 
+               options_for_select(courses.collect {|c| [c.title, c.id]}),
+               :onchange => 'alert("TODO: ajax search");') %><br />
+<%= select_tag( %>
