@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100512075442) do
+ActiveRecord::Schema.define(:version => 20100518055017) do
 
   create_table "agenda_items", :force => true do |t|
     t.string   "name"
@@ -75,6 +75,11 @@ ActiveRecord::Schema.define(:version => 20100512075442) do
     t.integer  "course_id"
   end
 
+  create_table "instructors", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "link_types", :force => true do |t|
     t.string   "name"
     t.decimal  "weight",     :precision => 10, :scale => 0
@@ -86,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20100512075442) do
     t.integer  "link_type_id"
     t.integer  "left_user_id"
     t.integer  "right_user_id"
+    t.integer  "context_id"
+    t.string   "context_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -105,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20100512075442) do
     t.string   "email"
     t.string   "studentid"
     t.string   "gender",     :default => "m"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,3 +1,4 @@
+class GroupFullError < RuntimeError; end
 class Group < ActiveRecord::Base
   validates_inclusion_of :open, :in => [true,false]
   validates_presence_of :name
@@ -8,6 +9,7 @@ class Group < ActiveRecord::Base
                                          :allow_nil => true
   has_many :group_memberships
   has_many :users, :through => :group_memberships
+  has_many :links, :as => :context
   # Availabilities for the group indicates optimal meeting times
   has_and_belongs_to_many :availabilities
 
@@ -28,7 +30,16 @@ class Group < ActiveRecord::Base
     course = a.course if a.course
   end
 
-  #FIXME!!!! do not allow users to be added past the user_limit
+  def add_member(member, membership_opts={})
+    return nil if member_exists?(member)
+    raise GroupFullError if user_limit > 0 and users.count == user_limit
+    self.group_memberships.create!({:user => member}.merge(membership_opts))
+    member_add_hook(member)
+  end
+
+  def member_exists?(member)
+    self.users.find(member)
+  end
 
   #TODO: return value
   # options include
@@ -78,5 +89,18 @@ private
 
   def override_user_limit
     user_limit = assignment.user_limit if assignment and assignment.user_limit
+  end
+
+  # Sets up an appropriate link between the new member and all existing members
+  def member_add_hook(member)
+    link_type = LinkType.group_member
+    self.users.each do |user|
+      Link.create!(
+        :left_user => member, 
+        :right_user => user, 
+        :link_type => link_type,
+        :context => self
+      )
+    end
   end
 end

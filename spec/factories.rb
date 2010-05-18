@@ -24,6 +24,10 @@ Factory.sequence(:day_of_week) do
   (1..7).to_a.rand
 end
 
+Factory.sequence(:email) do
+  Faker::Internet.email
+end
+
 Factory.define(:group_membership) do |m|
   m.leader false
   m.status 'active'
@@ -67,6 +71,7 @@ Factory.define(:user) do |u|
   u.last_name  { Factory.next(:last_name) }
   u.studentid  { Factory.next(:studentid) }
   u.gender     { Factory.next(:gender) }
+  u.email      { Factory.next(:email) }
 end
 
 # User with only 1 day a week and one time available

@@ -6,4 +6,15 @@ class LinkType < ActiveRecord::Base
                             :allow_nil => false
 
   has_many :links
+
+  scope :group_members, lambda { where(:name => 'GroupMember').limit(1) }
+  scope :classmates, lambda { where(:name => 'Classmate').limit(1) }
+
+  def self.group_member
+    self.group_members.first
+  end
+
+  def self.classmate
+    self.classmates.first
+  end
 end

@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :studentid
       t.string :gender,    :default => 'm'
+      t.string :type
 
       t.timestamps
     end

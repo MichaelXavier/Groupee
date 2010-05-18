@@ -1,6 +1,6 @@
 class DurationValidator < ActiveModel::Validator
   def initialize(opts={})
-    raise ArgumentError, "Must specify :from and :to options" if options[:from].nil? or options[:to].nil?
+    raise ArgumentError, "Must specify :from and :to options" if opts[:from].nil? or opts[:to].nil?
   end
 
   def validate(record)

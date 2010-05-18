@@ -108,4 +108,41 @@ describe Group do
       subject.best_meeting_times(:count => 1, :duration => 5).count.should == 1
     end
   end
+
+  describe "#add_member" do
+    subject {Factory.create(:group, :user_limit => 2)}
+
+    before(:each) do
+      @user = Factory.create(:user)
+    end
+
+    it "adds a basic member" do
+      subject.add_member(@user)
+      subject.users.count.should == 1
+    end
+
+    it "accepts arguments for the membership" do
+      subject.add_member(@user, :leader => true)
+      subject.users.count.should == 1
+      subject.leaders.count.should == 1
+    end
+
+    it "does not add existing members" do
+      subject.add_member(@user)
+      subject.add_member(@user).should == nil
+      subject.users.count.should == 1
+    end
+
+    it "does not allow you to exceed the group limit" do
+      lambda { 3.times { subject.add_member(Factory.creat(:user)) } }.should raise_error(GroupFullError)
+    end
+
+    it "creates a link for each user when a new one is added" do
+      user2 = Factory.create(:user)
+      subject.add_member(@user)
+      subject.add_member(@user2)
+      Link.for_user(@user).count.should == 1
+      Link.for_user(@user2).count.should == 1
+    end
+  end
 end

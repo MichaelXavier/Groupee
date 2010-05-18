@@ -6,4 +6,6 @@ class Course < ActiveRecord::Base
 
   has_and_belongs_to_many :students, :class_name => "Users"
   has_many :assignments, :dependent => :destroy
+  has_many :links, :as => :context
+  belongs_to :instructor
 end
