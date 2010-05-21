@@ -33,12 +33,16 @@ class Group < ActiveRecord::Base
   def add_member(member, membership_opts={})
     return nil if member_exists?(member)
     raise GroupFullError if user_limit > 0 and users.count == user_limit
-    self.group_memberships.create!({:user => member}.merge(membership_opts))
+    self.group_memberships.create!({:user => member, :status => 'active'}.merge(membership_opts))
     member_add_hook(member)
   end
 
   def member_exists?(member)
-    self.users.find(member)
+    begin
+      self.users.find(member.id)
+    rescue ActiveRecord::RecordNotFound
+      return false
+    end
   end
 
   #TODO: return value

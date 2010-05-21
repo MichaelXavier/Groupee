@@ -9,6 +9,7 @@ gem 'mysql'
 
 gem 'devise',               '1.1.rc0'
 gem 'cancan'
+gem 'spreadsheet'
 
 group(:development) do
   gem 'quietbacktrace'
