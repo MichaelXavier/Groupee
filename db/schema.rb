@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100518055017) do
+ActiveRecord::Schema.define(:version => 20100512075442) do
 
   create_table "agenda_items", :force => true do |t|
     t.string   "name"
@@ -75,14 +75,9 @@ ActiveRecord::Schema.define(:version => 20100518055017) do
     t.integer  "course_id"
   end
 
-  create_table "instructors", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "link_types", :force => true do |t|
     t.string   "name"
-    t.decimal  "weight",     :precision => 10, :scale => 0
+    t.decimal  "weight",     :precision => 3, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

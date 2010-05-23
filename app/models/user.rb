@@ -19,10 +19,10 @@ class User < ActiveRecord::Base
     # funky_kong         0.0         2.7         1.6
     # candy_kong         2.7         0.0         2.7
     # diddy_kong         1.6         2.7         0.0
-    def one_mode_matricize
-      links = Link.all.include(:left_user, :right_user)
+    def one_mode_matricize(filename)
+      links = Link.includes(:left_user, :right_user)
       users = links.inject([]) {|a, link| a += [link.left_user, link.right_user]}.uniq
-      cols_with_keys = users.inject({}) {|h, user| h.merge(user.id => user.full_name)}
+      cols_with_keys = users.inject({}) {|h, user| h.merge(user.id => "#{user.full_name}(#{user.id})")}
 
       workbook = matricize_with_cols(cols_with_keys) do |matrix|
         links.each do |link|
@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
           matrix.add_weight(link.left_user_id, link.right_user_id, link.link_type.weight)
         end
       end
+
+      workbook.write(filename)
     end
   end
 end
