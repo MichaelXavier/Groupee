@@ -83,3 +83,19 @@ Factory.define(:group_leader, :parent => :user) do |u|
   #FIXME; not sure if you can use this on a has_many association
   u.association :group_memberships, :factory => :leader_group_membership
 end
+
+Factory.define(:assignment) do |a|
+  a.name "Super Important Assignment"
+  a.association :course
+  a.assigned { 2.days.ago }
+  a.due { 4.days.from_now }
+  a.user_limit 0
+end
+
+Factory.define(:course) do |c|
+  c.title "Bonus Bonanza" 
+  c.sequence(:sln) {|n| n + 12345}
+  c.catalog_name "CSS999" 
+  c.quarter "winter" 
+  c.year 2010
+end

@@ -114,6 +114,8 @@ describe Group do
 
     before(:each) do
       @user = Factory.create(:user)
+      @link_type = mock_model(LinkType)
+      LinkType.stub(:group_member).and_return(@link_type)
     end
 
     it "adds a basic member" do
@@ -133,16 +135,20 @@ describe Group do
       subject.users.count.should == 1
     end
 
+    it "does not create a link for existing members" do
+      Link.should_not_receive(:create!)
+      subject.add_member(@user)
+    end
+
     it "does not allow you to exceed the group limit" do
-      lambda { 3.times { subject.add_member(Factory.creat(:user)) } }.should raise_error(GroupFullError)
+      lambda { 3.times { subject.add_member(Factory.create(:user)) } }.should raise_error(GroupFullError)
     end
 
     it "creates a link for each user when a new one is added" do
       user2 = Factory.create(:user)
+      Link.should_receive(:create!).with(:left_user => user2, :right_user => @user, :link_type => @link_type, :context => subject)
       subject.add_member(@user)
-      subject.add_member(@user2)
-      Link.for_user(@user).count.should == 1
-      Link.for_user(@user2).count.should == 1
+      subject.add_member(user2)
     end
   end
 end

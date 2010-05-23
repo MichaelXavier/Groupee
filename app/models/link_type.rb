@@ -17,4 +17,16 @@ class LinkType < ActiveRecord::Base
   def self.classmate
     self.classmates.first
   end
+
+  def self.setup_defaults
+    LinkType.find_or_create_by_name(
+      :name => "GroupMember",
+      :weight => 0.8
+    )
+
+    LinkType.find_or_create_by_name(
+      :name => "Classmate",
+      :weight => 0.4
+    )
+  end
 end

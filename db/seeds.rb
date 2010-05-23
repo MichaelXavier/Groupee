@@ -30,16 +30,7 @@
 
 
 # Standard Link Types
-LinkType.find_or_create_by_name(
-  :name => "GroupMember",
-  :weight => 0.8
-)
-
-LinkType.find_or_create_by_name(
-  :name => "Classmate",
-  :weight => 0.4
-)
-
+LinkType.setup_defaults
 # Create an instructor
 @instructor = Instructor.find_or_create_by_email(
   :email => "c.kong@dkc.com",
