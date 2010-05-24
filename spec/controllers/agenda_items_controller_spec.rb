@@ -108,18 +108,18 @@ describe AgendaItemsController do
 
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested agenda_item" do
-      AgendaItem.should_receive(:find).with("37") { mock_agenda_item }
-      mock_agenda_item.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
+  #describe "DELETE destroy" do
+  #  it "destroys the requested agenda_item" do
+  #    AgendaItem.should_receive(:find).with("37") { mock_agenda_item }
+  #    mock_agenda_item.should_receive(:destroy)
+  #    delete :destroy, :id => "37"
+  #  end
 
-    it "redirects to the agenda_items list" do
-      AgendaItem.stub(:find) { mock_agenda_item(:destroy => true) }
-      delete :destroy, :id => "1"
-      response.should redirect_to(agenda_items_url)
-    end
-  end
+  #  it "redirects to the agenda_items list" do
+  #    AgendaItem.stub(:find) { mock_agenda_item(:destroy => true) }
+  #    delete :destroy, :id => "1"
+  #    response.should redirect_to(agenda_items_url)
+  #  end
+  #end
 
 end

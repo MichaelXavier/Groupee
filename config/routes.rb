@@ -3,7 +3,9 @@ Groupee::Application.routes.draw do |map|
 
   resources :agenda_items
 
-  resources :courses
+  resources :courses do
+    put :enroll, :on => :member
+  end
 
   resources :meetings
 

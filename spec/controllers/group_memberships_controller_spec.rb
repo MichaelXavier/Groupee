@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe GroupMembershipsController do
+  #FIXME: extract to somewhere else
+  before(:each) do
+    @controller.send(:set_default_user)#FIXME: this is ugly and wrong
+  end
 
   def mock_group_membership(stubs={})
     @mock_group_membership ||= mock_model(GroupMembership, stubs).as_null_object
@@ -108,18 +112,18 @@ describe GroupMembershipsController do
 
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested group_membership" do
-      GroupMembership.should_receive(:find).with("37") { mock_group_membership }
-      mock_group_membership.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
+  #describe "DELETE destroy" do
+  #  it "destroys the requested group_membership" do
+  #    GroupMembership.should_receive(:find).with("37") { mock_group_membership }
+  #    mock_group_membership.should_receive(:destroy)
+  #    delete :destroy, :id => "37"
+  #  end
 
-    it "redirects to the group_memberships list" do
-      GroupMembership.stub(:find) { mock_group_membership(:destroy => true) }
-      delete :destroy, :id => "1"
-      response.should redirect_to(group_memberships_url)
-    end
-  end
+  #  it "redirects to the group_memberships list" do
+  #    GroupMembership.stub(:find) { mock_group_membership(:destroy => true) }
+  #    delete :destroy, :id => "1"
+  #    response.should redirect_to(group_memberships_url)
+  #  end
+  #end
 
 end

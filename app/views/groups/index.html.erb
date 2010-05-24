@@ -2,10 +2,25 @@
 
 <div class="groups_list">
   <% unless @groups.empty? %>
-    <%= render :partial => "listed_group", :collection => @groups %>
+    <ul>
+      <% @groups.each do |group| %>
+        <li><%= link_to group.name.titleize, group_path(group) %></li>
+      <% end %>
+    </ul>
   <% else %>
     <h3>You have not joined any groups yet. You can <%= link_to("join one", new_group_membership_path) %> or <%= link_to "create one", new_group_path %></h3>
   <% end %>
 </div>
 
-<%= link_to 'New Group', new_group_path %>
+<div class="new_group">
+  <%= link_to 'New Group', new_group_path %>
+</div>
+
+<h3>Suggested Groups to Join</h3>
+<div class="suggested_groups">
+  <% unless @suggested_groups.empty? %>
+    <%= render :partial => "listed_group", :collection => @suggested_groups %>
+  <% else %>
+    <h3>There are no other groups to join.</h3>
+  <% end %>
+</div>

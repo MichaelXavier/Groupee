@@ -108,18 +108,18 @@ describe MeetingsController do
 
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested meeting" do
-      Meeting.should_receive(:find).with("37") { mock_meeting }
-      mock_meeting.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
+  #describe "DELETE destroy" do
+  #  it "destroys the requested meeting" do
+  #    Meeting.should_receive(:find).with("37") { mock_meeting }
+  #    mock_meeting.should_receive(:destroy)
+  #    delete :destroy, :id => "37"
+  #  end
 
-    it "redirects to the meetings list" do
-      Meeting.stub(:find) { mock_meeting(:destroy => true) }
-      delete :destroy, :id => "1"
-      response.should redirect_to(meetings_url)
-    end
-  end
+  #  it "redirects to the meetings list" do
+  #    Meeting.stub(:find) { mock_meeting(:destroy => true) }
+  #    delete :destroy, :id => "1"
+  #    response.should redirect_to(meetings_url)
+  #  end
+  #end
 
 end

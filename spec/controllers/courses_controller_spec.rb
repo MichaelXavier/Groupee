@@ -108,18 +108,18 @@ describe CoursesController do
 
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested course" do
-      Course.should_receive(:find).with("37") { mock_course }
-      mock_course.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
+  #describe "DELETE destroy" do
+  #  it "destroys the requested course" do
+  #    Course.should_receive(:find).with("37") { mock_course }
+  #    mock_course.should_receive(:destroy)
+  #    delete :destroy, :id => "37"
+  #  end
 
-    it "redirects to the courses list" do
-      Course.stub(:find) { mock_course(:destroy => true) }
-      delete :destroy, :id => "1"
-      response.should redirect_to(courses_url)
-    end
-  end
+  #  it "redirects to the courses list" do
+  #    Course.stub(:find) { mock_course(:destroy => true) }
+  #    delete :destroy, :id => "1"
+  #    response.should redirect_to(courses_url)
+  #  end
+  #end
 
 end

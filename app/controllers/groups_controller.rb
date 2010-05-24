@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
   # GET /groups.xml
   def index
     @groups = @current_user.groups
+    @suggested_groups = Group.suggested_for_user(@current_user)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,10 +41,11 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.xml
   def create
-    @group = @current_user.groups.build(params[:group])
+    @group = Group.new(params[:group])
 
     respond_to do |format|
       if @group.save
+        @group.add_member(@current_user, :leader => true)
         format.html { redirect_to(@group, :notice => 'Group was successfully created.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else

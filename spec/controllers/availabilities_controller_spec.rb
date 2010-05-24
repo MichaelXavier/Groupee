@@ -108,18 +108,18 @@ describe AvailabilitiesController do
 
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested availability" do
-      Availability.should_receive(:find).with("37") { mock_availability }
-      mock_availability.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
+  #describe "DELETE destroy" do
+  #  it "destroys the requested availability" do
+  #    Availability.should_receive(:find).with("37") { mock_availability }
+  #    mock_availability.should_receive(:destroy)
+  #    delete :destroy, :id => "37"
+  #  end
 
-    it "redirects to the availabilities list" do
-      Availability.stub(:find) { mock_availability(:destroy => true) }
-      delete :destroy, :id => "1"
-      response.should redirect_to(availabilities_url)
-    end
-  end
+  #  it "redirects to the availabilities list" do
+  #    Availability.stub(:find) { mock_availability(:destroy => true) }
+  #    delete :destroy, :id => "1"
+  #    response.should redirect_to(availabilities_url)
+  #  end
+  #end
 
 end

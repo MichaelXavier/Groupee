@@ -108,18 +108,18 @@ describe AssignmentsController do
 
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested assignment" do
-      Assignment.should_receive(:find).with("37") { mock_assignment }
-      mock_assignment.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
+  #describe "DELETE destroy" do
+  #  it "destroys the requested assignment" do
+  #    Assignment.should_receive(:find).with("37") { mock_assignment }
+  #    mock_assignment.should_receive(:destroy)
+  #    delete :destroy, :id => "37"
+  #  end
 
-    it "redirects to the assignments list" do
-      Assignment.stub(:find) { mock_assignment(:destroy => true) }
-      delete :destroy, :id => "1"
-      response.should redirect_to(assignments_url)
-    end
-  end
+  #  it "redirects to the assignments list" do
+  #    Assignment.stub(:find) { mock_assignment(:destroy => true) }
+  #    delete :destroy, :id => "1"
+  #    response.should redirect_to(assignments_url)
+  #  end
+  #end
 
 end
