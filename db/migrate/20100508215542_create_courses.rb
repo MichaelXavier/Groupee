@@ -7,6 +7,7 @@ class CreateCourses < ActiveRecord::Migration
       t.string :section
       t.string :quarter
       t.integer :year
+      t.integer :instructor_id
 
       t.timestamps
     end

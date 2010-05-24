@@ -1,9 +1,10 @@
 class GroupFullError < RuntimeError; end
 class Group < ActiveRecord::Base
+  VALID_STATUSES = %w[ active suspended closed ]
   validates_inclusion_of :open, :in => [true,false]
   validates_presence_of :name
   validates_numericality_of :user_limit, :greater_than => 0
-  validates_inclusion_of :status,        :in => %w[ active suspended closed ]
+  validates_inclusion_of :status,        :in => VALID_STATUSES
   validates_format_of :website,          :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix, 
                                          :allow_blank => true, 
                                          :allow_nil => true
@@ -21,6 +22,13 @@ class Group < ActiveRecord::Base
 
   accepts_nested_attributes_for :group_memberships, :allow_destroy => true
 
+  # Groups the user currently isn't in and are either not associated with a class or are associated with a class the user is in
+  scope :suggested_for_user, lambda {|user| 
+    mids = user.group_memberships.collect(&:id)
+    cids = user.courses.collect(&:id)
+    joins("INNER JOIN group_memberships ON (#{"group_memberships.id NOT IN (#{mids.join(',')}) AND " unless mids.empty?}groups.id  = group_memberships.id)").where("groups.course_id = ? OR groups.course_id IN (?)", nil, cids)
+  }
+
   def leaders
     group_memberships.leaders.collect(&:user)
   end
@@ -32,9 +40,13 @@ class Group < ActiveRecord::Base
 
   def add_member(member, membership_opts={})
     return nil if member_exists?(member)
-    raise GroupFullError if user_limit > 0 and users.count == user_limit
+    raise GroupFullError if full?
     self.group_memberships.create!({:user => member, :status => 'active'}.merge(membership_opts))
     member_add_hook(member)
+  end
+
+  def full?
+    user_limit > 0 and users.count == user_limit
   end
 
   def member_exists?(member)

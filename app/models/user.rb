@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :group_memberships
   has_many :groups, :through => :group_memberships
   has_many :availabilities
-  has_and_belongs_to_many :course
+  has_and_belongs_to_many :courses
 
   def full_name
     [self.first_name, self.last_name].join(" ")

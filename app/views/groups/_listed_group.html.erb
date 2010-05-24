@@ -1,0 +1,15 @@
+<div class="listed_group <%= group_status_style(listed_group.status) %>">
+  <h3><%= link_to_if(listed_group.website, listed_group.name, :url => listed_group.website) %><%= " (#{listed_group.status.titleize})" unless listed_group.status == "active" %></h2>
+  <% if listed_group.course %>
+    Formed for <%= link_to listed_group.course.short_name, course_path(listed_group.course) %>. 
+  <% end %>
+  <% if listed_group.open? %>
+    <% if listed_group.full?  %>
+      <span class="join_full">Not Accepting Members</span>
+    <% else %>
+      <span class="join_group">TODO: route with param for join</span>
+    <% end %>
+  <% else %>
+    <span class="join_closed">Not Accepting Members</span>
+  <% end %>
+</div>

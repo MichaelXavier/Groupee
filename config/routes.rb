@@ -11,7 +11,9 @@ Groupee::Application.routes.draw do |map|
 
   resources :group_memberships
   resources :groups
-  resources :users
+  resources :users do
+    resources :group_memberships
+  end
 
   #FIXME: this should redirect later to a sessions#new or something
   root :to => "groups#index"

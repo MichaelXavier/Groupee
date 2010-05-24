@@ -12,7 +12,7 @@
 
   <div class="field">
     <%= f.label :leader, "Select Group" %><br />
-    <%= course_select_tag nil, @courses, :onchange => "", :id => 'course_select' %>
+    <%= course_select :group_id, @groups %>
   </div>
 
 

@@ -23,8 +23,10 @@ class GroupMembershipsController < ApplicationController
 
   # GET /group_memberships/new
   # GET /group_memberships/new.xml
+  #TODO: need to set up the view especially for this
   def new
     @group_membership = GroupMembership.new
+    @groups           = Group.suggested_for_user(@current_user)
 
     respond_to do |format|
       format.html # new.html.erb

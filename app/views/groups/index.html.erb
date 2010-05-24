@@ -1,31 +1,11 @@
-<h1>Listing groups</h1>
+<h1>My Groups</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>User limit</th>
-    <th>Status</th>
-    <th>Website</th>
-    <th>Open</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @groups.each do |group| %>
-  <tr>
-    <td><%= group.name %></td>
-    <td><%= group.user_limit %></td>
-    <td><%= group.status %></td>
-    <td><%= group.website %></td>
-    <td><%= group.open %></td>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<div class="groups_list">
+  <% unless @groups.empty? %>
+    <%= render :partial => "listed_group", :collection => @groups %>
+  <% else %>
+    <h3>You have not joined any groups yet. You can <%= link_to("join one", new_group_membership_path) %> or <%= link_to "create one", new_group_path %></h3>
+  <% end %>
+</div>
 
 <%= link_to 'New Group', new_group_path %>
