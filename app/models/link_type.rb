@@ -8,15 +8,16 @@ class LinkType < ActiveRecord::Base
 
   has_many :links
 
-  scope :group_members, lambda { where(:name => 'GroupMember').limit(1) }
-  scope :classmates,    lambda { where(:name => 'Classmate').limit(1)   }
-
   def self.group_member
-    self.group_members.first
+    where(:name => 'GroupMember').limit(1).first
   end
 
   def self.classmate
-    self.classmates.first
+    where(:name => 'Classmate').limit(1).first
+  end
+
+  def self.meeting_attendee
+    where(:name => 'MeetingAttendee').limit(1).first
   end
 
   def self.setup_defaults
@@ -28,6 +29,11 @@ class LinkType < ActiveRecord::Base
     LinkType.find_or_create_by_name(
       :name => "Classmate",
       :weight => 0.4
+    )
+
+    LinkType.find_or_create_by_name(
+      :name => "MeetingAttendee",
+      :weight => 0.1
     )
   end
 end

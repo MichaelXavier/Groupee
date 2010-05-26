@@ -1,6 +1,5 @@
 module Matricizable
 
-private
   def matricize_with_cols(cols={})
     raise ArgumentError, "Expecting block" unless block_given?
     idx = 1
@@ -18,10 +17,6 @@ private
     workbook.write('/tmp/deleteme.xls')#MXDEBUG
     yield builder
     workbook
-  end
-
-  def create_workbook
-    Spreadsheet::Workbook.new
   end
 
   class MatrixBuilder
@@ -43,5 +38,11 @@ private
       @sheet[@map[left_id],@map[right_id]] = @sheet[@map[left_id],@map[right_id]].to_f + weight
       @sheet[@map[right_id],@map[left_id]] = @sheet[@map[right_id],@map[left_id]].to_f + weight
     end
+  end
+
+private
+
+  def create_workbook
+    Spreadsheet::Workbook.new
   end
 end
