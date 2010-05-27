@@ -4,6 +4,6 @@ class AgendaItem < ActiveRecord::Base
   belongs_to :meeting
 
   def mark_completed
-    self.update_attribute(:completed, true)
+    self.update_attributes(:completed => true)
   end
 end

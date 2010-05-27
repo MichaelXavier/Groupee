@@ -106,3 +106,10 @@ Factory.define(:meeting) do |m|
   m.to    4.hours.from_now
   m.location "Jungle Hijinx"
 end
+
+Factory.define(:agenda_item) do |a|
+  a.name "Super important thing"
+  a.description "Infiltrate Outer Heaven"
+  a.association :meeting
+  a.completed false
+end
