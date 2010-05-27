@@ -1,6 +1,6 @@
 class Assignment < ActiveRecord::Base
   validates_presence_of :name, :allow_nil => false
-  validates_numericality_of :user_limit, :greater_than => 0
+  validates_numericality_of :user_limit
   validates_with DurationValidator, :from => :assigned, :to => :due
 
   belongs_to :course

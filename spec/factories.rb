@@ -113,3 +113,6 @@ Factory.define(:agenda_item) do |a|
   a.association :meeting
   a.completed false
 end
+
+Factory.define(:instructor, :class => Instructor, :parent => :user) do |i|
+end
