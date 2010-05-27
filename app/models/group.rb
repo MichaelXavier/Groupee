@@ -43,6 +43,7 @@ class Group < ActiveRecord::Base
     raise GroupFullError if full?
     self.group_memberships.create!({:user => member, :status => 'active'}.merge(membership_opts))
     member_add_hook(member)
+    member
   end
 
   def full?

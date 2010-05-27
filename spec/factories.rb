@@ -99,3 +99,10 @@ Factory.define(:course) do |c|
   c.quarter "winter" 
   c.year 2010
 end
+
+Factory.define(:meeting) do |m|
+  m.title "Bonus Round" 
+  m.from  2.hours.from_now
+  m.to    4.hours.from_now
+  m.location "Jungle Hijinx"
+end
