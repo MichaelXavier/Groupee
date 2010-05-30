@@ -1,9 +1,11 @@
 module Matricizable
 
+  # Receives hash with ids as the keys, a label as the value
   def matricize_with_cols(cols={})
     raise ArgumentError, "Expecting block" unless block_given?
+    # Initial offset
     idx = 1
-    row_col_map, label_map = {}, {}
+    row_col_map, label_map = {}, []
     cols.each do |id, label|
       row_col_map[id] = idx
       label_map[idx] = label
@@ -27,10 +29,9 @@ module Matricizable
     end
 
     def prepare_labels(label_map)
-      @sheet.row(0).push("")
-      label_map.each do |idx, label|
-        @sheet.row(0).push(label)
-        @sheet.row(idx).push(label)  
+      label_map.each_with_index do |label, idx|
+        @sheet[0,idx] = label
+        @sheet[idx,0] = label
       end
     end
 

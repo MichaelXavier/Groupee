@@ -18,13 +18,13 @@ namespace :demo do
     prog_msg("Creating 3 courses") do
       @assignments, @courses = [], []
       @instructors.each do |instructor|
-        course = Factory(:course)
+        course = Factory.create(:course)
         3.times do
-          assignment = Factory(:assignment)
+          assignment = Factory.create(:assignment)
           @assignments << assignment
           course.assignments << assignment
         end
-        course.save
+        course.save!
 
         @courses << course
         instructor.courses << course
@@ -44,11 +44,10 @@ namespace :demo do
 
         group.course = course if course_group
 
-        group.save
+        group.save!
 
-        count = (1..10).to_a.length
-        count[rand(count)].times do
-          user = Factory(:user)
+        rand(10).times do
+          user = Factory.create(:user)
           @users << user
           group.add_member(user)
 
@@ -61,10 +60,11 @@ namespace :demo do
 
     prog_msg("Setting up 20 meetings") do
       20.times do
-        meeting = Factory(:meeting)
-        count = (1..5).to_a.length
-        count[rand(count)].times do
-          user = @users[rand(@users.length)]
+        meeting = Factory.create(:meeting)
+        users = @users.dup
+        rand(10).times do
+          break if users.empty?
+          user = users.delete_at(rand(users.length))
           meeting.add_attendee(user)
 
           # Optionally have them attend
@@ -73,7 +73,16 @@ namespace :demo do
       end
     end
 
-    puts "There are now #{Link.count} links in the system"
+    puts <<-EOS
+There are now #{Assignment.count} assignments
+There are now #{Course.count} courses
+There are now #{Group.count} groups
+There are now #{GroupMembership.count} group memberships
+There are now #{Instructor.count} instructors
+There are now #{Link.count} links
+There are now #{Meeting.count} meetings
+There are now #{User.count} users
+    EOS
   end
 
   #FIXME: refactor this somewhere so it can be shared?

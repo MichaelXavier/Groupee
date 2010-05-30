@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   VALID_STATUSES = %w[ active suspended closed ]
   validates_inclusion_of :open, :in => [true,false]
   validates_presence_of :name
-  validates_numericality_of :user_limit, :greater_than => 0
+  validates_numericality_of :user_limit, :greater_than_or_equal_to => 0
   validates_inclusion_of :status,        :in => VALID_STATUSES
   validates_format_of :website,          :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix, 
                                          :allow_blank => true, 
@@ -112,6 +112,7 @@ private
   def member_add_hook(member)
     link_type = LinkType.group_member
     self.users.each do |user|
+      puts "u #{user.id} m #{member.id}"#MXDEBUG
       next if user == member
       Link.create!(
         :left_user => member, 

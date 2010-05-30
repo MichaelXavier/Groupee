@@ -44,6 +44,7 @@ Factory.define(:group) do |g|
   g.status  'active'
   g.name    { Factory.next(:group_name) }
   g.open    true
+  g.user_limit 0
 end
 
 #FIXME: this factory does not build correctly
