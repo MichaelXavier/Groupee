@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.xml
   def show
-    @group = @current_user.groups.find(params[:id])
+    @group = @current_user.groups.includes(:group_memberships => :user).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

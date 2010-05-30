@@ -146,3 +146,8 @@ form {
   background-color: #BABABA;
   margin-left: 3px;
 }
+
+.group_membership_status {
+  float: right;
+  font-style: italic;
+}

@@ -1,30 +1,35 @@
-<p class="notice"><%= notice %></p>
+<h1 class="centered_title">Group: <%= @group.name %></h1>
+<ul>
+  <li>
+    <b>Max # Members:</b> <%= @group.user_limit > 0 ? @group.user_limit : "Unlimited" %>
+  </li>
+  <li>
+    <b>Status:</b> <%= @group.status.titleize %>
+  </li>
+  <% if @group.website %>
+    <li>
+      <b>Website:</b> <%= link_to(@group.website) %>
+    </li>
+  <% end %>
+  <li>
+    <b>Open:</b> <%= bool_text(@group.open?) %>
+  </li>
+</ul>
 
-<p>
-  <b>Name:</b>
-  <%= @group.name %>
-</p>
-
-<p>
-  <b>User limit:</b>
-  <%= @group.user_limit %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @group.status %>
-</p>
-
-<p>
-  <b>Website:</b>
-  <%= @group.website %>
-</p>
-
-<p>
-  <b>Open:</b>
-  <%= @group.open %>
-</p>
-
-
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<h3>Current Members</h3>
+<ul class="fancy_list">
+  <% if !@group.group_memberships.blank? -%>
+    <% for group_membership in @group.group_memberships -%>
+      <% user = group_membership.user %>
+      <li>
+        <%= link_to user.full_name, user_path(user) %>
+        <% if group_membership.leader?  %>
+          <%= image_tag "icons/medal.png", :alt => "Leader", :title => "Leader" %>
+        <% end %>
+        <span class="group_membership_status">(<%= group_membership.status %>)</span>
+      </li>
+    <% end -%>
+  <% else -%>
+    <li>There are currently no members in this group</li>
+  <% end -%>
+</ul>
