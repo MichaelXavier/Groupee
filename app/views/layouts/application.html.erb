@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Groupee</title>
-  <%= stylesheet_link_tag :all %>
+  <title>Groupee: Groups Get It Done</title>
+  <%= stylesheet_link_tag 'groupee.css' %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
 
-<%= yield %>
+  <div id="layout_container">
+    <div id="layout_body">
+      <div id="layout_header">
+        <% link_to root_path do %>
+          <%= image_tag "groupee_cropped_small.png" %>
+        <% end %>
+        <h1 id="site_title">Groupee</h1>
+      </div>
+
+      <% if alert %>
+        <div id="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <% if notice %>
+        <div id="notice">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+
+      <div id="layout_footer">
+        <%= link_to "Log Out", root_path %>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

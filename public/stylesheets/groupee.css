@@ -1,0 +1,80 @@
+body {
+  background-color: #20718C;
+  font-family: Arial, Helvetica, 'Sans Serif';
+  font-size: 12px;
+  color: #222222;
+}
+
+img {
+  border: 0;
+}
+
+a {
+  color: #222222;
+  font-weight: bold;
+}
+
+#layout_header {
+  height: 132px;
+}
+
+#layout_header a {
+  float: left;
+  margin-bottom: 10px;
+  margin: 0px 50px 10px 0px;
+}
+
+#layout_container {
+  width: 600px;
+  margin: 40px auto;
+}
+
+#site_title {
+  font-size: 80px;
+}
+
+#layout_body {
+  background-color: #FFFFFF;
+  border: 0;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  padding: 0px 15px 15px 15px;
+  -webkit-box-shadow: 5px 5px 5px #134252;
+  -moz-box-shadow: 5px 5px 5px #134252;
+}
+
+#layout_footer {
+  border-top: 1px solid #BABABA;
+  text-align: center;
+  padding-top: 5px;
+}
+
+#alert {
+  padding: 8px;
+  margin: 5px 0 5px 0;
+  background-color: #FEC2C4;
+  border: 1px solid #AB0703;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  color: #AB0703;
+  font-weight: bold;
+}
+
+#alert a {
+  color: #AB0703;
+}
+
+#notice {
+  padding: 8px;
+  margin: 5px 0 5px 0;
+  background-color: #FEFDC2;
+  border: 1px solid #ABA803;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  color: #ABA803;
+  font-weight: bold;
+}
+
+#notice a {
+  color: #CCC803;
+}
