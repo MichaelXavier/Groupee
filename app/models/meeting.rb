@@ -7,6 +7,8 @@ class Meeting < ActiveRecord::Base
   has_many :agenda_items, :dependent => :destroy
   has_and_belongs_to_many :attendees, :class_name => "User"
 
+  accepts_nested_attributes_for :agenda_items, :reject_if => :all_blank
+
   # All this method does is call the hook unless the user is not on the list of
   # attendees. There is no list of users who actually attended so there is
   # nothing to check against. That means the hook could get called multiple
@@ -28,7 +30,7 @@ class Meeting < ActiveRecord::Base
   def add_attendee(attendee)
     return nil if attendee_exists? attendee
     self.attendees << attendee
-    self.save#FIXME: is this necessary? i always forget
+    self.save
     add_attendee_hook(attendee)
     attendee
   end

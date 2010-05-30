@@ -44,7 +44,7 @@ class AgendaItemsController < ApplicationController
 
     respond_to do |format|
       if @agenda_item.save
-        format.html { redirect_to(@agenda_item, :notice => 'Agenda item was successfully created.') }
+        format.html { redirect_to(:back, :notice => 'Agenda item was successfully created.') }
         format.xml  { render :xml => @agenda_item, :status => :created, :location => @agenda_item }
       else
         format.html { render :action => "new" }

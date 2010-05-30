@@ -1,25 +1,29 @@
-<p class="notice"><%= notice %></p>
+<div class="meeting">
+  <h1>Group Meeting: <%= @meeting.title %></h1>
 
-<p>
-  <b>Title:</b>
-  <%= @meeting.title %>
-</p>
+  <% if @meeting.from and @meeting.to %>
+    <h3>Scheduled for <%= @meeting.from %> to <%= @meeting.to %></h3>
+  <% end %>
 
-<p>
-  <b>From:</b>
-  <%= @meeting.from %>
-</p>
+  <% if @meeting.location %>
+    <h3>Location: <%= @meeting.location %></h3>
+  <% end %>
 
-<p>
-  <b>To:</b>
-  <%= @meeting.to %>
-</p>
+  <h2>Meeting Agenda</h2>
 
-<p>
-  <b>Location:</b>
-  <%= @meeting.location %>
-</p>
+  <h3>Add an item to the agenda:</h3>
+  <%= render :partial => 'agenda_items/form', :locals => {:agenda_item => @meeting.agenda_items.build } %>
 
-
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>
+  <% if @meeting.agenda_items.reject(&:new_record?).empty? %>
+    <h3> There are no agenda Items.</h3>
+  <% else %>
+    <ol class="meeting_agenda">
+      <% for agenda_item in @meeting.agenda_items.reject(&:new_record?) -%>
+        <li>
+          <%= agenda_item.name %>
+          <%# TODO: nested form to complete it %>
+        </li>
+      <% end -%>
+    </ol>
+  <% end %>
+</div>
