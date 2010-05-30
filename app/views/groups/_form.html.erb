@@ -1,36 +1,38 @@
 <%= form_for(@group, :builder => GroupFormBuilder) do |f| %>
-  <% if @group.errors.any? %>
-  <div id="errorExplanation">
-    <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
-    <ul>
-    <% @group.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+  <fieldset>
+    <% if @group.errors.any? %>
+    <div id="errorExplanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+      <ul>
+      <% @group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
     <% end %>
-    </ul>
-  </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :user_limit %><br />
-    <%= f.text_field :user_limit %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.status_select :status %>
-  </div>
-  <div class="field">
-    <%= f.label :website %><br />
-    <%= f.text_field :website %>
-  </div>
-  <div class="field">
-    <%= f.label :open, "Open for new members?" %><br />
-    <%= f.check_box :open %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.required_label :name, "Group Name" %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.required_label :user_limit, "Max # of Members (0 for unlimited)" %><br />
+      <%= f.text_field :user_limit %>
+    </div>
+    <div class="field">
+      <%= f.label :status %><br />
+      <%= f.status_select :status %>
+    </div>
+    <div class="field">
+      <%= f.label :website %><br />
+      <%= f.text_field :website %>
+    </div>
+    <div class="field">
+      <%= f.label :open, "Open for new members?" %><br />
+      <%= f.check_box :open %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </fieldset>
 <% end %>

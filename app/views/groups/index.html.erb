@@ -1,8 +1,8 @@
-<h1>My Groups</h1>
+<h1 class="centered_title">My Groups</h1>
 
 <div class="groups_list">
   <% unless @groups.empty? %>
-    <ul>
+    <ul class="fancy_list">
       <% @groups.each do |group| %>
         <li><%= link_to group.name.titleize, group_path(group) %></li>
       <% end %>
@@ -21,6 +21,6 @@
   <% unless @suggested_groups.empty? %>
     <%= render :partial => "listed_group", :collection => @suggested_groups %>
   <% else %>
-    <h3>There are no other groups to join.</h3>
+    <h5>Groupee could not find any suggested groups. Why don't you <%= link_to "create one", new_group_path %></h5>
   <% end %>
 </div>

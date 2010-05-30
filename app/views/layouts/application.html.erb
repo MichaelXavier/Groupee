@@ -19,12 +19,14 @@
 
       <% if alert %>
         <div id="alert">
+          <%= image_tag "icons/error.png" %>
           <%= alert %>
         </div>
       <% end %>
 
       <% if notice %>
         <div id="notice">
+          <%= image_tag "icons/information.png" %>
           <%= notice %>
         </div>
       <% end %>

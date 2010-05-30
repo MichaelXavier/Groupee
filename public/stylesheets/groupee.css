@@ -14,6 +14,43 @@ a {
   font-weight: bold;
 }
 
+fieldset {
+  border: none;
+  position: relative;
+}
+
+fieldset legend span {
+  border-bottom: 1px solid #FFFFFF;
+  display: block;
+  font-size: 2.25em;
+  line-height: 1.1;
+  margin: 20px 0;
+  padding-bottom: 20px;
+  /*position: absolute;*/
+  /*display: block;*/
+}
+
+input, textarea {
+  border: 1px solid #666666;
+  padding: 5px;
+  width: 220px;
+  background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+  background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+}
+
+textarea {
+  height: 140px;
+}
+
+form {
+  width: 250px;
+  margin: auto;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
 #layout_header {
   height: 132px;
 }
@@ -64,6 +101,10 @@ a {
   color: #AB0703;
 }
 
+#alert img {
+  float: left;
+}
+
 #notice {
   padding: 8px;
   margin: 5px 0 5px 0;
@@ -77,4 +118,31 @@ a {
 
 #notice a {
   color: #CCC803;
+}
+
+#notice img {
+  float: left;
+}
+
+.centered_title {
+  text-align: center;
+  padding: 3px 0 3px 0;
+  background-color: #E0E0E0;
+}
+
+.fancy_list {
+  list-style: none;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.fancy_list li {
+  background-color: #E0E0E0;
+  margin: 1px 0 1px 0;
+  padding: 5px;
+}
+
+.fancy_list li:hover {
+  background-color: #BABABA;
+  margin-left: 3px;
 }
