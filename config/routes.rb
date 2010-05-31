@@ -1,4 +1,6 @@
 Groupee::Application.routes.draw do |map|
+  devise_for :users
+
   resources :assignments
 
   resources :agenda_items
