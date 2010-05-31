@@ -16,7 +16,6 @@ module Matricizable
     sheet    = workbook.create_worksheet
     builder  = MatrixBuilder.new(sheet, row_col_map)
     builder.prepare_labels(label_map)
-    workbook.write('/tmp/deleteme.xls')#MXDEBUG
     yield builder
     workbook
   end

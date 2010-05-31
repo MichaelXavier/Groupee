@@ -112,7 +112,6 @@ private
   def member_add_hook(member)
     link_type = LinkType.group_member
     self.users.each do |user|
-      puts "u #{user.id} m #{member.id}"#MXDEBUG
       next if user == member
       Link.create!(
         :left_user => member, 

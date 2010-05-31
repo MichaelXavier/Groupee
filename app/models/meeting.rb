@@ -38,7 +38,6 @@ private
   def sign_in_attendee_hook(user)
     link_type = LinkType.meeting_attendee
     self.attendees.each do |attendee|
-      puts "a #{attendee.id} u #{user.id}"#MXDEBUG
       next if attendee == user
       Link.create!(
         :left_user => user, 
