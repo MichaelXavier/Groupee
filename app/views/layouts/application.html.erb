@@ -14,7 +14,14 @@
         <% link_to root_path do %>
           <%= image_tag "groupee_cropped_small.png" %>
         <% end %>
-        <h1 id="site_title">Groupee</h1>
+        <div id="header_text">
+          <h1 id="site_title">Groupee</h1>
+          <h3 id="site_menu">
+            <%= link_unless_currently_on "Groups", groups_path %> |
+            <%= link_unless_currently_on "Meetings", meetings_path %> |
+            <%= link_unless_currently_on "Courses", courses_path %>
+          </h3>
+        </div>
       </div>
 
       <% if alert %>

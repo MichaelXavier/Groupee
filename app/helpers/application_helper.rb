@@ -17,4 +17,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def link_unless_currently_on(name, path, link_args={})
+    link_to_unless((request.env['PATH_INFO'] == path), name, path, link_args)
+  end
 end

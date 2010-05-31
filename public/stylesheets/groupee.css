@@ -55,7 +55,7 @@ form {
   height: 132px;
 }
 
-#layout_header a {
+#layout_header img {
   float: left;
   margin-bottom: 10px;
   margin: 0px 50px 10px 0px;
@@ -66,8 +66,17 @@ form {
   margin: 40px auto;
 }
 
+#header_text {
+  text-align: center;
+}
+
 #site_title {
   font-size: 80px;
+  margin: 0px;
+}
+
+#site_menu {
+  float: left;
 }
 
 #layout_body {
