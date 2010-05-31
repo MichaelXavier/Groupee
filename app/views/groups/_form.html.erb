@@ -1,15 +1,6 @@
 <%= form_for(@group, :builder => GroupFormBuilder) do |f| %>
   <fieldset>
-    <% if @group.errors.any? %>
-    <div id="errorExplanation">
-      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
-      <ul>
-      <% @group.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-    <% end %>
+    <%= error_div(@group) %>
 
     <div class="field">
       <%= f.required_label :name, "Group Name" %><br />

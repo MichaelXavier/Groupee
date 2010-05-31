@@ -1,5 +1,21 @@
 class User < ActiveRecord::Base
   extend Matricizable
+
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :timeoutable
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :activatable
+  devise :lockable, :lock_strategy => :none
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :first_name, 
+                  :last_name, 
+                  :studentid, 
+                  :gender, 
+                  :email, 
+                  :password, 
+                  :password_confirmation
   validates_uniqueness_of :studentid, :email
   validates_inclusion_of :gender, :in => %w[ m f ]
   validates_presence_of :first_name, :last_name, :email

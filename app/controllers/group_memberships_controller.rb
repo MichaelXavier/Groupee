@@ -26,7 +26,7 @@ class GroupMembershipsController < ApplicationController
   #TODO: need to set up the view especially for this
   def new
     @group_membership = GroupMembership.new
-    @groups           = Group.suggested_for_user(@current_user)
+    @groups           = Group.suggested_for_user(current_user)
 
     respond_to do |format|
       format.html # new.html.erb

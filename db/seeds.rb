@@ -4,7 +4,9 @@
   :first_name => 'Funky',
   :last_name => 'Kong',
   :studentid => '11111',
-  :gender => 'm'
+  :gender => 'm',
+  :password => 'password',
+  :password_confirmation => 'password'
 )
 
 @user2 = User.find_or_create_by_email(
@@ -12,8 +14,15 @@
   :first_name => 'Swanky',
   :last_name => 'Kong',
   :studentid => '010101',
-  :gender => 'm'
+  :gender => 'm',
+  :password => 'password',
+  :password_confirmation => 'password'
 )
+
+[@user1, @user2].each(&:confirm!)
+
+# Standard Link Types
+LinkType.setup_defaults
 
 # Create a group
 @group = Group.find_or_create_by_name(
@@ -28,9 +37,6 @@
 @group.add_member(@user1, :leader => true)
 @group.add_member(@user2)
 
-
-# Standard Link Types
-LinkType.setup_defaults
 # Create an instructor
 @instructor = Instructor.find_or_create_by_email(
   :email => "c.kong@dkc.com",

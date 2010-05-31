@@ -34,7 +34,10 @@
       <%= yield %>
 
       <div id="layout_footer">
-        <%= link_to "Log Out", root_path %>
+        <% if user_signed_in? %>
+          <b>Signed in as <%= current_user.full_name %>.</b>
+          <%= link_to "Log Out", destroy_user_session_path %>
+        <% end %>
       </div>
     </div>
   </div>

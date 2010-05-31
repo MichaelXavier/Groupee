@@ -2,8 +2,8 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = @current_user.groups
-    @suggested_groups = Group.suggested_for_user(@current_user)
+    @groups = current_user.groups
+    @suggested_groups = Group.suggested_for_user(current_user)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.xml
   def show
-    @group = @current_user.groups.includes(:group_memberships => :user).find(params[:id])
+    @group = current_user.groups.includes(:group_memberships => :user).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
   # GET /groups/new
   # GET /groups/new.xml
   def new
-    @group = @current_user.groups.build
+    @group = current_user.groups.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,7 +35,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
-    @group = @current_user.groups.find(params[:id])
+    @group = current_user.groups.find(params[:id])
   end
 
   # POST /groups
@@ -45,7 +45,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        @group.add_member(@current_user, :leader => true)
+        @group.add_member(current_user, :leader => true)
         format.html { redirect_to(@group, :notice => 'Group was successfully created.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
   # PUT /groups/1
   # PUT /groups/1.xml
   def update
-    @group = @current_user.groups.find(params[:id])
+    @group = current_user.groups.find(params[:id])
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
