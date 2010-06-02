@@ -68,11 +68,13 @@ Factory.define(:availability) do |a|
 end
 
 Factory.define(:user) do |u|
-  u.first_name { Factory.next(:first_name) }
-  u.last_name  { Factory.next(:last_name) }
-  u.studentid  { Factory.next(:studentid) }
-  u.gender     { Factory.next(:gender) }
-  u.email      { Factory.next(:email) }
+  u.first_name            { Factory.next(:first_name) }
+  u.last_name             { Factory.next(:last_name) }
+  u.studentid             { Factory.next(:studentid) }
+  u.gender                { Factory.next(:gender) }
+  u.email                 { Factory.next(:email) }
+  u.password              "password"
+  u.password_confirmation "password"
 end
 
 # User with only 1 day a week and one time available

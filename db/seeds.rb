@@ -24,7 +24,7 @@
 # Standard Link Types
 LinkType.setup_defaults
 
-# Create a group
+# Create a few groups
 @group = Group.find_or_create_by_name(
   :name => "King K. Rool Task Force",
   :user_limit => 2,
@@ -33,9 +33,20 @@ LinkType.setup_defaults
   :open => true
 )
 
+@group2 = Group.find_or_create_by_name(
+  :name => "Cranky Kong's Cabin",
+  :user_limit => 0,
+  :status => 'active',
+  :website => 'http://www.crankyscabin.com',
+  :open => true
+)
+
 # Add group members
 @group.add_member(@user1, :leader => true)
 @group.add_member(@user2)
+
+@group2.add_member(@user1, :leader => true)
+@group2.add_member(@user2)
 
 # Create an instructor
 @instructor = Instructor.find_or_create_by_email(

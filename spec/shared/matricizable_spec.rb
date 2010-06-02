@@ -43,11 +43,9 @@ describe Matricizable::MatrixBuilder do
 
   subject { Matricizable::MatrixBuilder.new(@sheet, @row_map) }
 
-  it "has accessors for the label map and sheet" do
+  it "has readers for the label map and sheet" do
     subject.sheet.should == @sheet
     subject.map.should == @row_map
-    subject.should respond_to(:sheet=)
-    subject.should respond_to(:map=)
   end
 
   describe "prepare_labels" do
