@@ -3,7 +3,7 @@
 <head>
   <title>Groupee: Groups Get It Done</title>
   <%= stylesheet_link_tag 'groupee.css' %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'jquery-1.4.2.min.js' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -11,7 +11,7 @@
   <div id="layout_container">
     <div id="layout_body">
       <div id="layout_header">
-        <% link_to root_path do %>
+        <%= link_to root_path do %>
           <%= image_tag "groupee_cropped_small.png" %>
         <% end %>
         <div id="header_text">
