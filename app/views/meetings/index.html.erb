@@ -1,28 +1,43 @@
-<h1>Listing meetings</h1>
+<h1>Upcoming Meetings</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>From</th>
-    <th>To</th>
-    <th>Location</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="meetings_list">
+  <% unless @meetings.empty? %>
+    <ul class="fancy_list">
+      <% @meetings.each do |meeting| %>
+        <li><%= link_to meeting.title.titleize, meeting_path(meeting) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <h3>You have no scheduled meetings. Feel free to <%= link_to "request one", new_meeting_path %>.</h3>
+  <% end %>
+</div>
 
-<% @meetings.each do |meeting| %>
-  <tr>
-    <td><%= meeting.title %></td>
-    <td><%= meeting.from %></td>
-    <td><%= meeting.to %></td>
-    <td><%= meeting.location %></td>
-    <td><%= link_to 'Show', meeting %></td>
-    <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-    <td><%= link_to 'Destroy', meeting, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<h3>Meeting Calendar</h3>
+
+  <div class="calendar_controls">
+    <%= link_to "&laquo;", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>  
+    <span class="current_month"><%= h @date.strftime("%B %Y") %></span>
+    <%= link_to "&raquo;", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> 
+  </div>
+  <%= calendar_for(@meeting, 
+                  :month => @date.month,
+                  :year => @date.year,
+                  :id => 'meeting_calendar',
+                  :class => 'calendar') do |table| %>
+    <%= table.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%> 
+    <%= table.day(:day_method => :from) do |date, meetings| %>  
+      <%= date.day %>  
+        <% for meeting in meetings -%>
+          <p>
+            <%= h(meeting.name) %>
+            <% if meeting.from %>
+              <%= meeting.from %><br />
+            <% end %>
+            <%= meeting.to %>
+          </p>
+        <% end -%>
+    <% end %>  
 <% end %>
-</table>
 
 <br />
 

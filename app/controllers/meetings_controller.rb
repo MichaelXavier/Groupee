@@ -3,6 +3,7 @@ class MeetingsController < ApplicationController
   # GET /meetings.xml
   def index
     @meetings = Meeting.all
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today  
 
     respond_to do |format|
       format.html # index.html.erb
