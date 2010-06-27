@@ -2,8 +2,8 @@ class CreateMeetings < ActiveRecord::Migration
   def self.up
     create_table :meetings do |t|
       t.string :title
-      t.datetime :from
-      t.datetime :to
+      t.datetime :from_date
+      t.datetime :to_date
       t.string :location
 
       t.timestamps

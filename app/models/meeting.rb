@@ -1,11 +1,13 @@
 class Meeting < ActiveRecord::Base
   validates_presence_of :title
-  validates_presence_of :from, :allow_nil => false
-  validates_presence_of :to, :allow_nil => false
-  validates_with DurationValidator, :from => :from, :to => :to
+  validates_presence_of :from_date, :allow_nil => false
+  validates_presence_of :to_date, :allow_nil => false
+  validates_with DurationValidator, :from => :from_date, :to => :to_date
 
   has_many :agenda_items, :dependent => :destroy
   has_and_belongs_to_many :attendees, :class_name => "User"
+
+  has_event_calendar :start_at_field => :from_date, :end_at_field => :to_date
 
   accepts_nested_attributes_for :agenda_items, :reject_if => :all_blank
 

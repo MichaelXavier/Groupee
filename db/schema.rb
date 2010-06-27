@@ -100,8 +100,8 @@ ActiveRecord::Schema.define(:version => 20100531032724) do
 
   create_table "meetings", :force => true do |t|
     t.string   "title"
-    t.datetime "from"
-    t.datetime "to"
+    t.datetime "from_date"
+    t.datetime "to_date"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :table_builder do
+# task :event_calendar do
 #   # Task goes here
 # end

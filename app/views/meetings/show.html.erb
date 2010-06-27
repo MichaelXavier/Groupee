@@ -1,8 +1,8 @@
 <div class="meeting">
   <h1>Group Meeting: <%= @meeting.title %></h1>
 
-  <% if @meeting.from and @meeting.to %>
-    <h3>Scheduled for <%= @meeting.from %> to <%= @meeting.to %></h3>
+  <% if @meeting.from_date and @meeting.to_date %>
+    <h3>Scheduled for <%= @meeting.from_date %> to <%= @meeting.to_date %></h3>
   <% end %>
 
   <% if @meeting.location %>

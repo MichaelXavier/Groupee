@@ -3,7 +3,13 @@ class MeetingsController < ApplicationController
   # GET /meetings.xml
   def index
     @meetings = Meeting.all
-    @date = params[:month] ? Date.parse(params[:month]) : Date.today  
+
+    @month = params[:month].blank? ? Date.today.month : params[:month].to_i
+    @year = params[:year].blank? ? Date.today.year : params[:year].to_i
+
+    @shown_month = Date.civil(@year, @month)
+
+    @event_strips = Meeting.event_strips_for_month(@shown_month)
 
     respond_to do |format|
       format.html # index.html.erb

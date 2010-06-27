@@ -105,8 +105,8 @@ end
 
 Factory.define(:meeting) do |m|
   m.title "Bonus Round" 
-  m.from  2.hours.from_now
-  m.to    4.hours.from_now
+  m.from_date  2.hours.from_now
+  m.to_date    4.hours.from_now
   m.location "Jungle Hijinx"
 end
 

@@ -9,18 +9,18 @@ describe Meeting do
     end
 
     it "adds to the association" do
-      subject.attendees.should_receive(:<<).with(@user)
+      subject.attendees.should_recieve(:<<).with(@user)
       subject.add_attendee(@user).should_not == nil
     end
 
     it "calls a hook" do
-      subject.should_receive(:add_attendee_hook).with(@user)
+      subject.should_recieve(:add_attendee_hook).with(@user)
       subject.add_attendee(@user)
     end
 
     it "does not add to the association and returns nil if the attendee already exists" do
       subject.stub(:attendee_exists?).and_return(true)
-      subject.attendees.should_not_receive(:<<).with(@user)
+      subject.attendees.should_not_recieve(:<<).with(@user)
       subject.add_attendee(@user).should == nil
     end
   end
@@ -38,12 +38,12 @@ describe Meeting do
     end
 
     it "calls a hook" do
-      subject.should_receive(:sign_in_attendee_hook).with(@user)
+      subject.should_recieve(:sign_in_attendee_hook).with(@user)
       subject.sign_in_attendee(@user)
     end
 
     it "does not create a link for existing members" do
-      Link.should_not_receive(:create!)
+      Link.should_not_recieve(:create!)
       subject.sign_in_attendee(@user)
     end
 
@@ -51,7 +51,7 @@ describe Meeting do
       user2 = Factory.create(:user)
       subject.add_attendee(user2)
       subject.sign_in_attendee(@user)
-      Link.should_receive(:create!).with(:left_user => user2, :right_user => @user, :link_type => @link_type, :context => subject)
+      Link.should_recieve(:create!).with(:left_user => user2, :right_user => @user, :link_type => @link_type, :context => subject)
       subject.sign_in_attendee(user2)
     end
   end

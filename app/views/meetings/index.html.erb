@@ -1,3 +1,11 @@
+<%= content_for :javascript do %>
+  <%= javascript_include_tag 'event_calendar' %>
+<% end %>
+
+<%= content_for :stylesheet do %>
+  <%= stylesheet_link_tag 'event_calendar' %>
+<% end %>
+
 <h1>Upcoming Meetings</h1>
 
 <div class="meetings_list">
@@ -14,30 +22,7 @@
 
 <h3>Meeting Calendar</h3>
 
-  <div class="calendar_controls">
-    <%= link_to "&laquo;", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>  
-    <span class="current_month"><%= h @date.strftime("%B %Y") %></span>
-    <%= link_to "&raquo;", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> 
-  </div>
-  <%= calendar_for(@meeting, 
-                  :month => @date.month,
-                  :year => @date.year,
-                  :id => 'meeting_calendar',
-                  :class => 'calendar') do |table| %>
-    <%= table.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%> 
-    <%= table.day(:day_method => :from) do |date, meetings| %>  
-      <%= date.day %>  
-        <% for meeting in meetings -%>
-          <p>
-            <%= h(meeting.name) %>
-            <% if meeting.from %>
-              <%= meeting.from %><br />
-            <% end %>
-            <%= meeting.to %>
-          </p>
-        <% end -%>
-    <% end %>  
-<% end %>
+<%= raw(event_calendar) %>
 
 <br />
 
