@@ -8,7 +8,7 @@ gem 'devise',               '1.1.rc1'
 gem 'cancan'
 gem 'spreadsheet'
 
-group(:development) do
+group(:development, :test) do
   gem 'quietbacktrace'
 end
 
@@ -22,6 +22,4 @@ group(:test) do
   gem 'spork'
   gem 'launchy'
   gem 'faker'
-  gem 'rr'
-  gem 'quietbacktrace'
 end

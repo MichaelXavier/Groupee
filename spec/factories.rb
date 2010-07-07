@@ -28,7 +28,7 @@ Factory.sequence(:email) do
   Faker::Internet.email
 end
 
-Factory.define(:group_membership) do |m|
+Factory.define(:group_membership, :default_strategy => :build) do |m|
   m.leader false
   m.status 'active'
 
@@ -40,7 +40,7 @@ Factory.define(:leader_group_membership, :parent => :group_membership) do |m|
   m.leader true
 end
 
-Factory.define(:group) do |g|
+Factory.define(:group, :default_strategy => :build) do |g|
   g.status  'active'
   g.name    { Factory.next(:group_name) }
   g.open    true
@@ -61,13 +61,13 @@ Factory.define(:small_group, :parent => :group) do |g|
   end
 end
 
-Factory.define(:availability) do |a|
+Factory.define(:availability, :default_strategy => :build) do |a|
   a.day_of_week { Factory.next(:day_of_week) }
   a.from        { 3.hours.ago }
   a.to          { 1.hour.from_now }
 end
 
-Factory.define(:user) do |u|
+Factory.define(:user, :default_strategy => :build) do |u|
   u.first_name            { Factory.next(:first_name) }
   u.last_name             { Factory.next(:last_name) }
   u.studentid             { Factory.next(:studentid) }
@@ -75,6 +75,7 @@ Factory.define(:user) do |u|
   u.email                 { Factory.next(:email) }
   u.password              "password"
   u.password_confirmation "password"
+  u.confirmed_at Time.now
 end
 
 # User with only 1 day a week and one time available
@@ -87,7 +88,7 @@ Factory.define(:group_leader, :parent => :user) do |u|
   u.association :group_memberships, :factory => :leader_group_membership
 end
 
-Factory.define(:assignment) do |a|
+Factory.define(:assignment, :default_strategy => :build) do |a|
   a.name "Super Important Assignment"
   a.association :course
   a.assigned { 2.days.ago }
@@ -95,7 +96,7 @@ Factory.define(:assignment) do |a|
   a.user_limit 0
 end
 
-Factory.define(:course) do |c|
+Factory.define(:course, :default_strategy => :build) do |c|
   c.title "Bonus Bonanza" 
   c.sequence(:sln) {|n| n + 12345}
   c.catalog_name "CSS999" 
@@ -103,14 +104,14 @@ Factory.define(:course) do |c|
   c.year 2010
 end
 
-Factory.define(:meeting) do |m|
+Factory.define(:meeting, :default_strategy => :build) do |m|
   m.title "Bonus Round" 
   m.from_date  2.hours.from_now
   m.to_date    4.hours.from_now
   m.location "Jungle Hijinx"
 end
 
-Factory.define(:agenda_item) do |a|
+Factory.define(:agenda_item, :default_strategy => :build) do |a|
   a.name "Super important thing"
   a.description "Infiltrate Outer Heaven"
   a.association :meeting

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe AgendaItem do
-  subject { Factory.create(:agenda_item) }
+  subject { Factory.build(:agenda_item) }
 
   describe "#mark_completed" do
     it "sets completed true" do

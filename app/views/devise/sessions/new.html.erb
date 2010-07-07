@@ -1,6 +1,6 @@
 <h2 class="centered_title">Sign in</h2>
 
-<%= form_for(resource_name, resource, :url => session_path(resource_name)) do |f| %>
+<%= form_for(resource, :url => session_path(resource_name)) do |f| %>
   <fieldset>
     <%= error_div(resource) %>
 
@@ -26,4 +26,3 @@
     <%= render :partial => "devise/shared/links" %>
   </fieldset>
 <% end %>
-
