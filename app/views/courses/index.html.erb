@@ -1,33 +1,15 @@
-<h1>Listing courses</h1>
+<h1 class="centered_title">My Courses</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Sln</th>
-    <th>Catalog name</th>
-    <th>Section</th>
-    <th>Quarter</th>
-    <th>Year</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div id="current_courses">
+  <% unless @courses.empty? %>
+    <h3>You are currently enrolled in <%= pluralize(@courses.count, "course") %></h3>
 
-<% @courses.each do |course| %>
-  <tr>
-    <td><%= course.title %></td>
-    <td><%= course.sln %></td>
-    <td><%= course.catalog_name %></td>
-    <td><%= course.section %></td>
-    <td><%= course.quarter %></td>
-    <td><%= course.year %></td>
-    <td><%= link_to 'Show', course %></td>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to 'Destroy', course, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Course', new_course_path %>
+    <ul class="fancy_list">
+      <% @courses.each do |course| %>
+        <li><%= link_to "#{course.title.titleize} (#{course.catalog_name})", course_path(course) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <h3>You are not currently enrolled in any courses.</h3>
+  <% end %>
+</div>

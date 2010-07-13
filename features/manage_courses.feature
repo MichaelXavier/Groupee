@@ -14,38 +14,37 @@ Feature: Manage Courses
         | Advanced Barrel Throwing | 52891 | BIS220       |
       And I am on the courses page
 
-  @wip
   Scenario: List of current courses
       Then I should see "You are currently enrolled in 1 course"
-       And I should see "CSS490" within "current_courses"
+       And I should see "CSS490" within "#current_courses"
 
   @wip
   Scenario: Find a course by SLN
       Then I should see "Find a course"
-      When I fill in "67890" in "SLN Number"
+      When I fill in "SLN Number" with "67890"
        And I press "Find Course"
       Then I should see "Bonus Bonanza"
        And I should not see "Advanced Barrel Throwing"
 
   @wip
   Scenario: Find a course by title with partial
-      When I fill in "Barrel" in "Title"
+      When I fill in "Title" with "Barrel"
        And I press "Find Course"
       Then I should see "Advanced Barrel Throwing"
        And I should not see "Bonus Bonanza"
 
   @wip
   Scenario: Enroll in a course
-     Given  I fill in "67890" in "SLN Number"
-       And  I press "Find Course"
-       When I follow "Enroll in Course"
-       Then I should see "BIS100" within "current_courses"
+     Given I fill in "SLN Number" with "67890"
+       And I press "Find Course"
+      When I follow "Enroll in Course"
+      Then I should see "BIS100" within "current_courses"
 
   @wip
   Scenario: Drop a course
       Given I should see "Drop Course" within "current_courses"
        When I follow "Drop Course"
-       Then I should see "You currently are not enrolled in any courses"
+       Then I should see "You are not currently enrolled in any courses"
 
   @wip
   Scenario: View course info

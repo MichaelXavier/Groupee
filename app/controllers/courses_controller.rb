@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.xml
   def index
-    @courses = Course.all
+    @courses = current_user.courses
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.xml
   def show
-    @course = Course.find(params[:id])
+    @group = current_user.courses.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
   # GET /courses/new
   # GET /courses/new.xml
   def new
-    @course = Course.new
+    @course = current_user.courses.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
-    @course = Course.find(params[:id])
+    @course = current_user.courses.find(params[:id])
   end
 
   # POST /courses
@@ -44,6 +44,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+        @course.add_student(current_user)
         format.html { redirect_to(@course, :notice => 'Course was successfully created.') }
         format.xml  { render :xml => @course, :status => :created, :location => @course }
       else
@@ -56,7 +57,7 @@ class CoursesController < ApplicationController
   # PUT /courses/1
   # PUT /courses/1.xml
   def update
-    @course = Course.find(params[:id])
+    @course = current_user.courses.find(params[:id])
 
     respond_to do |format|
       if @course.update_attributes(params[:course])
@@ -72,12 +73,13 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.xml
   def destroy
-    @course = Course.find(params[:id])
-    @course.destroy
+    raise NotImplementedError, "Destroy functionality not yet implemented."
+    #@course = Course.find(params[:id])
+    #@course.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(courses_url) }
-      format.xml  { head :ok }
-    end
+    #respond_to do |format|
+    #  format.html { redirect_to(courses_url) }
+    #  format.xml  { head :ok }
+    #end
   end
 end

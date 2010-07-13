@@ -12,6 +12,12 @@ module NavigationHelpers
       '/'
     when /the new group page/
       new_group_path
+    when /the log in page/
+      new_user_session_path
+    when /the log in page/
+      destroy_user_session_path
+    when /the courses page/
+      courses_path
 
     
     # Add more mappings here.
