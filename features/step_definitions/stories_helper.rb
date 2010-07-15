@@ -9,11 +9,12 @@ module ToFooFromStory
     return '' if !value
     value.strip!
     case
-    when value =~ /^'(.*)'$/    then value = $1
-    when value =~ /^"(.*)"$/    then value = $1
-    when value == 'nil!'        then value = nil
-    when value == 'non-nil!'    then value = be_nil
-    when value =~ /^#\{(.*)\}$/ then value = eval($1)
+    when value =~ /^'(.*)'$/     then value = $1
+    when value =~ /^"(.*)"$/     then value = $1
+    when value == 'nil!'         then value = nil
+    when value == 'non-nil!'     then value = be_nil
+    when value =~ /date\((.*)\)/ then value = Chronic.parse($1) 
+    when value =~ /^#\{(.*)\}$/  then value = eval($1)
     end
     value
   end

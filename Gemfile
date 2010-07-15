@@ -22,4 +22,5 @@ group(:test) do
   gem 'spork'
   gem 'launchy'
   gem 'faker'
+  gem 'chronic'
 end

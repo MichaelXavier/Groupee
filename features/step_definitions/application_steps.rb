@@ -5,3 +5,7 @@ Given /^I have logged in as "([^\s]+)"$/ do |email|
   Given %(I log in with password "password")
    Then %(I should see "Signed in successfully")
 end
+
+Given %(I am an instructor) do
+  @user.update_attributes(:type => 'Instructor')
+end
