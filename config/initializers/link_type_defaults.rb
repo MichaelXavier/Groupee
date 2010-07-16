@@ -1,0 +1,1 @@
+LinkType.setup_defaults

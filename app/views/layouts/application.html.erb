@@ -18,6 +18,9 @@
         <% end %>
         <div id="header_text">
           <h1 id="site_title">Groupee</h1>
+          <% if current_user and current_user.instructor?  %>
+            <h2 class="mode">Instructor Mode</h2>
+          <% end %>
           <h3 id="site_menu">
             <%= link_to_unless_current "Groups", groups_path %> |
             <%= link_to_unless_current "Meetings", meetings_path %> |

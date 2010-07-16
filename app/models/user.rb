@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
     [self.first_name, self.last_name].join(" ")
   end
 
+  def instructor?
+    self.is_a? Instructor
+  end
+
   class << self
     # Results in a spreadsheet for analysis with the following format:
     #             funky_kong  candy_kong  diddy_kong

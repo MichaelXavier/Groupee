@@ -78,6 +78,17 @@ Factory.define(:user, :default_strategy => :build) do |u|
   u.confirmed_at Time.now
 end
 
+Factory.define(:instructor, :default_strategy => :build) do |i|
+  u.first_name            { Factory.next(:first_name) }
+  u.last_name             { Factory.next(:last_name) }
+  u.studentid             { Factory.next(:studentid) }
+  u.gender                { Factory.next(:gender) }
+  u.email                 { Factory.next(:email) }
+  u.password              "password"
+  u.password_confirmation "password"
+  u.confirmed_at Time.now
+end
+
 # User with only 1 day a week and one time available
 Factory.define(:busy_user, :parent => :user) do |u|
   u.association :availabilities 

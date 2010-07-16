@@ -18,6 +18,8 @@ module NavigationHelpers
       destroy_user_session_path
     when /the courses page/
       courses_path
+    when /the manage course (\d+) page/
+      edit_course_path($1)
 
     
     # Add more mappings here.

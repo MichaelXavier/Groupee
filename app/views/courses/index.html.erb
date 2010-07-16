@@ -2,11 +2,24 @@
 
 <div id="current_courses">
   <% unless @courses.empty? %>
-    <h3>You are currently enrolled in <%= pluralize(@courses.count, "course") %></h3>
+    <% if current_user.instructor? %>
+      <h3>You are currently teaching <%= pluralize(@courses.count, "course") %></h3>
+    <% else %>
+      <h3>You are currently enrolled in <%= pluralize(@courses.count, "course") %></h3>
+    <% end %>
 
     <ul class="fancy_list">
       <% @courses.each do |course| %>
-        <li><%= link_to "#{course.title.titleize} (#{course.catalog_name})", course_path(course) %></li>
+        <li id="course_<%= course.id %>">
+          <p>
+            <%= link_to "#{course.title.titleize} (#{course.catalog_name})", course_path(course) %>
+          </p>
+          <% if current_user.instructor? %>
+          <p>
+            <%= link_to "Manage Course", edit_course_path(course) %>
+          </p>
+          <% end %>
+        </li>
       <% end %>
     </ul>
   <% else %>
