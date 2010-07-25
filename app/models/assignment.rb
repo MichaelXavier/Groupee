@@ -11,4 +11,12 @@ class Assignment < ActiveRecord::Base
   def dissolve_groups
     groups.destroy_all
   end
+
+  def expired?
+    due and Time.now > due
+  end
+
+  def in_progress?
+    assigned and due and (assigned..due).include? Time.now
+  end
 end

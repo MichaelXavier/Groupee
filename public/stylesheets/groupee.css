@@ -159,3 +159,11 @@ form {
   float: right;
   font-style: italic;
 }
+
+#assignments.expired {
+  color: #8C2320;
+}
+
+#assignments.in_progress {
+  color: #208C22;
+}

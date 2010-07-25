@@ -15,9 +15,9 @@
             <%= link_to "#{course.title.titleize} (#{course.catalog_name})", course_path(course) %>
           </p>
           <% if current_user.instructor? %>
-          <p>
-            <%= link_to "Manage Course", edit_course_path(course) %>
-          </p>
+            <p>
+              <%= link_to "Manage Course", edit_course_path(course) %>
+            </p>
           <% end %>
         </li>
       <% end %>

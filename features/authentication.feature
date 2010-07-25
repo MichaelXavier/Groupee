@@ -9,7 +9,7 @@ Feature: Authentication
         | Cranky     | Kong      | c.kong@crankyscabin.com | password | password              |
       And I am "c.kong@crankyscabin.com"
       And my account is confirmed
-      And I log in with password "password"
+      And  I am not logged in
 
   Scenario: User visits the site without logging in
      Given I am on the homepage

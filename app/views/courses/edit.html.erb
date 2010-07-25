@@ -19,7 +19,14 @@
           <td><%= student.last_name %></td>
           <td><%= student.studentid %></td>
           <td><%= link_to student.email, "mailto:#{student.email}" %></td>
-          <td></td>
+          <td>
+            <p>
+              <%= form_tag(remove_student_course_path(@course), :method => :put) do -%>
+                <%= hidden_field_tag :student_id, student.id %>
+                <%= submit_tag "Remove User", :confirm => 'Are you sure you want to remove this user from the course?'  %>
+              <% end -%>
+            </p>
+          </td>
         </tr>
       <% end -%>
     <% else -%>
@@ -27,9 +34,46 @@
         There are currently no students enrolled in this course.
       </tr>
     <% end -%>
+  </tbody>
+</table>
+
+<h2>Assignments for Course</h2>
+
+<h3>
+  <%= link_to "Add Assignment", new_course_assignment_path(@course) %>
+</h3>
+<table id="assignments">
+  <thead>
     <tr>
-      <td></td>
+      <th>Name</th>
+      <th>Assigned On</th>
+      <th>Due On</th>
+      <th>Max Group Size</th>
+      <th>Status</th>
     </tr>
+  </thead>
+  <tbody>
+    <% if !@course.assignments.blank? -%>
+      <% for assignment in @course.assignments -%>
+        <tr id="assignment_<%= assignment.id %>">
+          <th><%= assignment.name %></th>
+          <th><%= assignment.assigned %></th>
+          <th><%= assignment.due %></th>
+          <th><%= assignment.user_limit %></th>
+          <th>
+            <% if assignment.expired? %>
+              <span class="expired">Expired</span>
+            <% elsif assignment.in_progress? %>
+              <span class="in_progress">In Progress</span>
+            <% end %>
+          </th>
+        </tr>
+      <% end -%>
+    <% else -%>
+      <tr colspan="4">
+        There are currently no assignments for this course.
+      </tr>
+    <% end -%>
   </tbody>
 </table>
 

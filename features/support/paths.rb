@@ -14,7 +14,7 @@ module NavigationHelpers
       new_group_path
     when /the log in page/
       new_user_session_path
-    when /the log in page/
+    when /the log out page/
       destroy_user_session_path
     when /the courses page/
       courses_path

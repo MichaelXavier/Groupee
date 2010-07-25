@@ -1,4 +1,5 @@
-<%= form_for(@assignment) do |f| %>
+<%#= form_for(@assignment, :url => course_assignment_path(*[@course.id, @assignment.id].compact)) do |f| %>
+<%= form_for([@course, @assignment]) do |f| %>
   <% if @assignment.errors.any? %>
   <div id="errorExplanation">
     <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
@@ -15,16 +16,16 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :course_id %><br />
-    <%= f.text_field :course_id %>
-  </div>
-  <div class="field">
     <%= f.label :assigned %><br />
     <%= f.datetime_select :assigned %>
   </div>
   <div class="field">
     <%= f.label :due %><br />
     <%= f.datetime_select :due %>
+  </div>
+  <div class="field">
+    <%= f.label :user_limit, "Member Limit (0 for ulimited)" %><br />
+    <%= f.text_field :user_limit %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -25,7 +25,7 @@ module ToFooFromStory
   def to_hash_from_story
     hsh = self.split(/,? and |, /).inject({}) do |hash_so_far, key_value|
       key, value = key_value.split(":")
-      if !value then warn "Couldn't understand story '#{self}': only understood up to the part '#{hash_so_far.to_yaml}'" end
+      warn "Couldn't understand story '#{self}': only understood up to the part '#{hash_so_far.to_yaml}'" unless value
       hash_so_far.merge(ToFooFromStory::fix_key(key) => ToFooFromStory::fix_value(value))
     end
   end

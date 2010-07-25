@@ -105,7 +105,6 @@ Then /^(?:|I )should see JSON:$/ do |expected_json|
 end
 
 Then /^(?:|I )should see "([^"]*)"(?: within "([^"]*)")?$/ do |text, selector|
-  #puts page.body#MXDEBUG
   with_scope(selector) do
     if page.respond_to? :should
       page.should have_content(text)
@@ -217,4 +216,19 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+When /^(?:|I )select "([^"]*)" from date(time)? field "([^"]*)"(?: within "([^"]*)")?$/ do |value, time, field, selector|
+  with_scope(selector) do
+    value = Chronic.parse(value)
+    year, month, day, hour, minute, ampm = value.strftime('%Y|%B|%d|%I|%M|%P').split('|')
+    select(year, :from => "#{field}_1i")
+    select(month, :from => "#{field}_2i")
+    select(day, :from => "#{field}_3i")
+    if time
+      select(hour, :from => "#{field}_4i")
+      select(minute, :from => "#{field}_5i")
+      select(ampm, :from => "#{field}_6i")
+    end
+  end
 end

@@ -13,7 +13,7 @@ Feature: Instructor Mode
         | Candy      | Kong      | 77  | candy@dkc.com  |
         | Swanky     | Kong      | 88  | swanky@dkc.com |
       And existing Assignments in course with sln 12345:
-        | id | name        | user_limit | assigned                       | due                |
+        | id | name        | user_limit  | assigned                       | due                |
         | 77  | Practicum 1 | 2          | date(2 weeks ago on wednesday) | date(last monday)  |
         | 88  | Practicum 2 | 5          | date(last wednesday)           | date(next tuesday) |
 
@@ -33,15 +33,14 @@ Feature: Instructor Mode
        And I should see "Swanky Kong" within "#enrolled_users"
        And I should see an email link with "candy@dkc.com" within "#user_77"
 
-  @wip
   Scenario: Removing a users from the course
      Given I am on the manage course 1 page 
-      When I follow "Remove User" within "#user_77"
+      When I press "Remove User" within "#user_77"
       Then I should see "Swanky Kong" within "#user_88"
-       But I should not see "Candy Kong"
+       And I should see "Student Candy Kong was successfully removed from the course"
+       But I should not see "Candy Kong" within "#enrolled_users"
        #TODO: verify emails?
 
-  @wip
   Scenario: Listing assignments
      Given I am on the manage course 1 page 
       Then I should see "Practicum 1" within "#assignments"
@@ -50,13 +49,13 @@ Feature: Instructor Mode
        And I should see "In Progress" within "#assignment_88"
        #TODO: group setup and assertions
 
-  @wip
   Scenario: Creating assignment
      Given I am on the manage course 1 page 
       When I follow "Add Assignment"
        And I fill in "Name" with "Practicum 3" 
        And I fill in "Member Limit" with "5" 
-       And I fill in "Assigned" with "#{7/14/2010}" 
-       And I fill in "Due" with "#{7/16/2010}" 
+       And I select "7/14/2010" from date field "assignment_assigned"
+       And I select "7/16/2010" from date field "assignment_due"
        And I press "Create"
+      When I am on the manage course 1 page 
       Then I should see "Practicum 3" within "#assignments"

@@ -70,6 +70,18 @@ class CoursesController < ApplicationController
     end
   end
 
+  def remove_student
+    @course = current_user.courses.find(params[:id])
+
+    student = User.find(params[:student_id])
+    @course.students.delete(student)
+
+    respond_to do |format|
+      format.html { redirect_to(edit_course_path(@course), :notice => "Student #{student.full_name} was successfully removed from the course.") }
+      format.xml  { head :ok }
+    end
+  end
+
   # DELETE /courses/1
   # DELETE /courses/1.xml
   def destroy

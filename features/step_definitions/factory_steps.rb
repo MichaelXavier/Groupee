@@ -11,7 +11,11 @@ end
 
 def instantiate_ivar_from_story(type, attrs)
   ivar_name, factory = type_and_factory_from_story(type)
-  attrs = attrs.send(:to_hash_from_story) if attrs.respond_to?(:to_hash_from_story)
+  if attrs.is_a? String
+    attrs = attrs.to_hash_from_story
+  else
+    attrs = attrs.inject({}) {|h,(k,v)| h[ToFooFromStory::fix_key(k)] = ToFooFromStory::fix_value(v);h}
+  end
   instance_variable_set("@#{ivar_name}", Factory.create(factory, attrs || {}))
   return ivar_name
 end
@@ -73,4 +77,8 @@ def type_and_factory_from_story(type)
   factory ||= type.singularize.underscore.to_sym
   
   return type, factory
+end
+
+def correct_hash(h)
+  h.inject({}) {|res,(k,v)| res.merge(ToFooFromStory::fix_key(k) => ToFooFromStory::fix_value(v))}
 end

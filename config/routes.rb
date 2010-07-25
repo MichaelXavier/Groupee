@@ -1,12 +1,14 @@
 Groupee::Application.routes.draw do |map|
   devise_for :users
 
-  resources :assignments
 
   resources :agenda_items
 
   resources :courses do
     put :enroll, :on => :member
+    put :remove_student, :on => :member
+
+    resources :assignments
   end
 
   resources :meetings do
