@@ -24,3 +24,20 @@ When /^I log in with password "(.*)"$/ do |password|
   And %(I fill in "Password" with "#{password}")
   And %(I press "Sign in")
 end
+
+Given /^I have logged in as instructor "([^\s]+)"$/ do |email|
+  @user = Factory.create(:instructor, :email => email, :password => 'password')
+  Given %(I am on the log in page)
+  Given %(my account is confirmed)
+  Given %(I log in with password "password")
+   Then %(I should see "Signed in successfully")
+end
+
+Given /^I have logged in as "([^\s]+)"$/ do |email|
+  @user ||= Factory.create(:user, :email => email, :password => 'password')
+  Given %(I am on the log in page)
+  Given %(my account is confirmed)
+  Given %(I log in with password "password")
+   Then %(I should see "Signed in successfully")
+end
+

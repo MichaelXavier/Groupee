@@ -20,6 +20,10 @@ module NavigationHelpers
       courses_path
     when /the manage course (\d+) page/
       edit_course_path($1)
+    when /the groups page/
+      groups_path
+    when /the manage group (\d+) page/
+      edit_group_path($1)
 
     
     # Add more mappings here.
